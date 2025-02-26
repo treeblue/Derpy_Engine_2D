@@ -18,10 +18,6 @@ class object:
         self.x += self.vx
         self.y += self.vy
         self.vy += GRAVITY
-
-    def cont_update(self, n:int) -> None:
-        for _ in range(n):
-            self.update_pos()
     
     def push(self, bump:list) -> None:
         self.vx += bump[0]
@@ -78,7 +74,7 @@ class all:
         plt.show()
 
     def update(self,n: int = 1) -> None:
-        for i in range(n):
+        for _ in range(n):
             for ob1 in self.objects:
                 for ob2 in self.objects:
                     if ob1 != ob2:
