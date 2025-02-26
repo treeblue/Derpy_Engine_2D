@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-GRAVITY: float = 1.
+GRAVITY: float = 0.
 BOUNDS: list = [800.,600.]
 RESIST: float = 0.99
 ELASTICITY: float = 0.8
@@ -54,10 +54,11 @@ class interact:
     def collide(self) -> None:
         dx = self.o1.get_pos()[0] - self.o2.get_pos()[0]
         dy = self.o1.get_pos()[1] - self.o2.get_pos()[1]
+        d = self.dist()
         ratio = self.o1.m/self.o2.m
-        self.o1.push([ratio*dx, ratio*dy])
+        self.o1.push([ratio*dx/d, ratio*dy/d])
         ratio = -1/ratio
-        self.o2.push([ratio*dx, ratio*dy])
+        self.o2.push([ratio*dx/d, ratio*dy/d])
 
 class scene:
     def __init__(self) -> None:
@@ -73,7 +74,7 @@ class scene:
         for obj in self.history:
             print(self.history[obj][len(self.history[obj])-5:])
     
-    def traces(self) -> None:
+    def traces(self, n:int=0) -> None:
         xs = []
         ys = []
         for obj in self.history:
@@ -84,6 +85,8 @@ class scene:
                 y.append(xy[1])
             xs.append(x)
             ys.append(y)
+        if n != 0:
+            n = len(xs) - n
         for i in range(len(xs)):
             plt.scatter(xs[i],ys[i])
         plt.show()
