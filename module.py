@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 GRAVITY: float = 1.
 BOUNDS: list = [800.,600.]
 RESIST: float = 0.99
-ELASTICITY: float = 0.5
+ELASTICITY: float = 0.8
 
 class object:
     def __init__(self, pos:list=[0.,0.], vel:list=[0.,0.], mass:float=1) -> None:
