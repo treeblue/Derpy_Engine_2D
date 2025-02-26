@@ -8,9 +8,12 @@ pg.init()
 screen = pg.display.set_mode(size)
 
 p1 = object(pos=[size[0]/2,size[1]/2],vel=[10.,0])
+other = object(pos=[size[0]/3,size[1]/2])
+
 
 frame = scene()
 frame.track(p1)
+frame.track(other)
 
 
 if __name__ == "__main__":
@@ -26,14 +29,14 @@ while running:
     screen.fill((0,0,0))
 
     key = pg.key.get_pressed()
-    MAGNITUDE = 1.5
+    MAGNITUDE = 1.
     if not waiter:
         if key[pg.K_a] == True:
             p1.push([-MAGNITUDE,0.])
         elif key[pg.K_d] == True:
             p1.push([MAGNITUDE,0.])
         elif key[pg.K_w] == True:
-            p1.push([0.,-MAGNITUDE-10])
+            p1.push([0.,-MAGNITUDE])
             waiter = True
         elif key[pg.K_s] == True:
             p1.push([0.,MAGNITUDE])
@@ -41,9 +44,9 @@ while running:
         if key[pg.K_w] == False:
             waiter = False
 
-    print(waiter)
+    # print(waiter)
 
-    frame.update()
+    frame.update(5)
     for obj in frame.objects:
         x,y = obj.get_pos()
         # print(int(x),int(y))
@@ -53,3 +56,5 @@ while running:
     sleep(0.05)
 
 pg.quit()
+frame.traces(n=3000000000000)
+# print(frame.history)

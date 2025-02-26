@@ -74,7 +74,7 @@ class scene:
         for obj in self.history:
             print(self.history[obj][len(self.history[obj])-5:])
     
-    def traces(self, n:int=0) -> None:
+    def traces(self, n:int=100) -> None:
         xs = []
         ys = []
         for obj in self.history:
@@ -85,10 +85,11 @@ class scene:
                 y.append(xy[1])
             xs.append(x)
             ys.append(y)
-        if n != 0:
-            n = len(xs) - n
+
+        
         for i in range(len(xs)):
-            plt.scatter(xs[i],ys[i])
+            m = (len(xs[i]) - n)//len(xs[i])
+            plt.scatter(xs[i][m:],ys[i][m:])
         plt.show()
 
     def update(self,n: int = 1) -> None:
