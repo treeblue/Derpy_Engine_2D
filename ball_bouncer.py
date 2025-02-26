@@ -1,5 +1,5 @@
 import pygame as pg
-from module import object, scene
+from src.physics import object, scene
 from time import sleep
 
 
@@ -56,5 +56,4 @@ while running:
     sleep(0.05)
 
 pg.quit()
-frame.traces(n=3000000000000)
-# print(frame.history)
+frame.traces()
