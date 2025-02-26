@@ -1,2 +1,3 @@
-#Conda environment
+#Environments
 .conda
+.venv
