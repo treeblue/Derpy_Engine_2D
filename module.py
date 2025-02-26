@@ -1,9 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-GRAVITY: float = -.01
+GRAVITY: float = .01
 BOUNDS: list = [800.,600.]
-RESIST: float = 0.9
+RESIST: float = 0.99
 
 class object:
     def __init__(self, pos:list=[0.,0.], vel:list=[0.,0.], mass:float=1) -> None:

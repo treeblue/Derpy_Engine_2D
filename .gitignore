@@ -1,3 +1,6 @@
 #Environments
 .conda
 .venv
+
+#???
+__pycache__
