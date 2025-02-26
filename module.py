@@ -54,7 +54,7 @@ class interact:
         ratio = -1/ratio
         self.o2.push([ratio*dx, ratio*dy])
 
-class all:
+class scene:
     def __init__(self) -> None:
         self.objects: list = []
         self.history: dict = {}
@@ -102,14 +102,14 @@ def main() -> None:
     other_blob =    object(pos=[100.,100.])
     other_blob.push([0.,10.])
 
-    scene = all()
-    scene.track(blob)
-    scene.track(other_blob)
+    s = scene()
+    s.track(blob)
+    s.track(other_blob)
 
     MAXTIME = 200
-    scene.update(MAXTIME)
+    s.update(MAXTIME)
 
-    scene.traces()
+    s.traces()
 
 if __name__ == "__main__":
     main()
