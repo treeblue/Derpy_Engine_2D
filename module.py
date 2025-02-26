@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-GRAVITY: float = -10.
+GRAVITY: float = -1.
 
 class object:
     def __init__(self, pos:list=[0.,0.], vel:list=[0.,0.], mass:float=1) -> None:
@@ -77,34 +77,31 @@ class all:
             plt.scatter(xs[i],ys[i])
         plt.show()
 
-    def update(self) -> None:
-        for ob1 in self.objects:
-            for ob2 in self.objects:
-                if ob1 != ob2:
-                    # print(f'interaction between {ob1} and {ob2}')
-                    interact(ob1, ob2)
-        for ob in self.objects:
-            ob.update()
-            self.history[ob].append(ob.get_pos())
+    def update(self,n: int = 1) -> None:
+        for i in range(n):
+            for ob1 in self.objects:
+                for ob2 in self.objects:
+                    if ob1 != ob2:
+                        interact(ob1, ob2)
+            for ob in self.objects:
+                ob.update()
+                self.history[ob].append(ob.get_pos())
 
 
 
 
 def main() -> None:
     blob =          object(pos=[0.,0.])
-    blob.push([1.9,0.])
+    blob.push([6.3,10.])
     other_blob =    object(pos=[100.,0.])
+    other_blob.push([0.,10.])
 
     scene = all()
     scene.track(blob)
     scene.track(other_blob)
 
-    
-
-    MAXTIME = 100
-    for t in range(MAXTIME):
-        scene.update()
-    scene.locate()
+    MAXTIME = 20
+    scene.update(MAXTIME)
 
     scene.traces()
 
