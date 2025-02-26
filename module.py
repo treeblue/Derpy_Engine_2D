@@ -2,6 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 GRAVITY: float = -1.
+BOUNDS: list = [1000.,1000.]
+RESIST: float = 0.9
 
 class object:
     def __init__(self, pos:list=[0.,0.], vel:list=[0.,0.], mass:float=1) -> None:
@@ -15,9 +17,17 @@ class object:
         return (self.x,self.y)
     
     def update(self) -> None:
+        if self.x < 5 or self.x > BOUNDS[0]-5:
+            self.vx = -self.vx
+        if self.y < 5 or self.y > BOUNDS[1]-5:
+            self.vy = -self.vy
+        
         self.x += self.vx
         self.y += self.vy
         self.vy += GRAVITY
+
+        self.vx *= RESIST
+        self.vy *= RESIST
     
     def push(self, bump:list) -> None:
         self.vx += bump[0]
@@ -87,16 +97,16 @@ class all:
 
 
 def main() -> None:
-    blob =          object(pos=[0.,0.])
+    blob =          object(pos=[50.,100.])
     blob.push([6.3,10.])
-    other_blob =    object(pos=[100.,0.])
+    other_blob =    object(pos=[100.,100.])
     other_blob.push([0.,10.])
 
     scene = all()
     scene.track(blob)
     scene.track(other_blob)
 
-    MAXTIME = 20
+    MAXTIME = 200
     scene.update(MAXTIME)
 
     scene.traces()
