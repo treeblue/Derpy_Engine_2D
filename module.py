@@ -30,14 +30,14 @@ class interact:
     def __init__(self, o1:object, o2:object) -> None:
         self.o1 = o1
         self.o2 = o2
-        self.range = 10.
+        self.range = 1.
         if self.dist() < self.range:
             self.collide()
     
     def dist(self) -> float:
         dx = self.o1.get_pos()[0] - self.o2.get_pos()[0]
         dy = self.o1.get_pos()[1] - self.o2.get_pos()[1]
-        return dx**2 + dy**2
+        return np.sqrt(dx**2 + dy**2)
     
     def collide(self) -> None:
         dx = self.o1.get_pos()[0] - self.o2.get_pos()[0]
@@ -47,20 +47,39 @@ class interact:
         ratio = -1/ratio
         self.o2.push([ratio*dx, ratio*dy])
 
-def main() -> None:
-    blob = object()
-    other_blob = object()
-    blob.push([1,0])
-    blob.update()
+class all:
+    def __init__(self) -> None:
+        self.objects: list = []
 
-    print(blob.get_pos(),other_blob.get_pos())
-    interact(blob,other_blob)
-    blob.update()
-    other_blob.update()
-    print(blob.get_pos(),other_blob.get_pos())
-    blob.update()
-    other_blob.update()
-    print(blob.get_pos(),other_blob.get_pos())
+    def track(self, obj: object) -> None:
+        self.objects.append(obj)
+    
+    def locate(self):
+        for obj in self.objects:
+            print(obj.get_pos())
+
+    def update(self) -> None:
+        for ob1 in self.objects:
+            for ob2 in self.objects:
+                if ob1 != ob2:
+                    print(f'interaction between {ob1} and {ob2}')
+                    interact(ob1, ob2)
+        for ob in self.objects:
+            ob.update()
+
+
+
+
+def main() -> None:
+    blob =          object(pos=[0.,0.])
+    other_blob =    object(pos=[5.,0.])
+
+    scene = all()
+    scene.track(blob)
+    scene.track(other_blob)
+    scene.locate()
+
+
 
 if __name__ == "__main__":
     main()
