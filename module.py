@@ -1,8 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-GRAVITY: float = -1.
-BOUNDS: list = [1000.,1000.]
+GRAVITY: float = -.01
+BOUNDS: list = [800.,600.]
 RESIST: float = 0.9
 
 class object:
@@ -17,10 +17,14 @@ class object:
         return (self.x,self.y)
     
     def update(self) -> None:
-        if self.x < 5 or self.x > BOUNDS[0]-5:
-            self.vx = -self.vx
-        if self.y < 5 or self.y > BOUNDS[1]-5:
-            self.vy = -self.vy
+        if self.x < 5:
+            self.vx = abs(self.vx)
+        elif self.x > BOUNDS[0]-5:
+            self.vx = -abs(self.vx)
+        if self.y < 5:
+            self.vy = abs(self.vy)
+        elif self.y > BOUNDS[1]-5:
+            self.vy = -abs(self.vy)
         
         self.x += self.vx
         self.y += self.vy
