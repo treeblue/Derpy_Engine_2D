@@ -1,9 +1,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-GRAVITY: float = .01
+GRAVITY: float = 1.
 BOUNDS: list = [800.,600.]
 RESIST: float = 0.99
+ELASTICITY: float = 0.5
 
 class object:
     def __init__(self, pos:list=[0.,0.], vel:list=[0.,0.], mass:float=1) -> None:
@@ -18,13 +19,13 @@ class object:
     
     def update(self) -> None:
         if self.x < 5:
-            self.vx = abs(self.vx)
+            self.vx = ELASTICITY*abs(self.vx)
         elif self.x > BOUNDS[0]-5:
-            self.vx = -abs(self.vx)
+            self.vx = -ELASTICITY*abs(self.vx)
         if self.y < 5:
-            self.vy = abs(self.vy)
+            self.vy = ELASTICITY*abs(self.vy)
         elif self.y > BOUNDS[1]-5:
-            self.vy = -abs(self.vy)
+            self.vy = -ELASTICITY*abs(self.vy)
         
         self.x += self.vx
         self.y += self.vy
