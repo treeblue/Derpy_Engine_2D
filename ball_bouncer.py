@@ -3,17 +3,21 @@ from src.physics import object, scene
 from time import sleep
 
 
+#This only uses the physics.py classes
+
 size = [800,600]
 pg.init()
 screen = pg.display.set_mode(size)
 
 p1 = object(pos=[size[0]/2,size[1]/2],vel=[10.,0])
 other = object(pos=[size[0]/3,size[1]/2])
+new = object(pos=[50.,20.])
 
 
 frame = scene()
 frame.track(p1)
 frame.track(other)
+frame.track(new)
 
 
 if __name__ == "__main__":
@@ -56,4 +60,4 @@ while running:
     sleep(0.05)
 
 pg.quit()
-frame.traces()
+frame.traces(10000)
